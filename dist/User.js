@@ -37,9 +37,8 @@ var User = function () {
             };
 
             rp(options).then(function (res) {
-                console.log('=====Ok:', res);
                 var user = JSON.stringify(res);
-                console.log('=====User:', user);
+                return User;
             }).catch(function (err) {
                 console.error("Unable to send message:" + err);
             });

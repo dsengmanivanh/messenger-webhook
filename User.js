@@ -27,9 +27,8 @@ class User {
 
     rp(options)
       .then(function (res) {
-          console.log('=====Ok:', res);
           const user = JSON.stringify(res);
-          console.log('=====User:', user);
+          return User;
       })
       .catch(function (err) {
           console.error("Unable to send message:" + err);

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -6,6 +6,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var request = require('request');
 var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+var rp = require('request-promise-native');
 
 var Message = function () {
   function Message() {
@@ -16,14 +17,14 @@ var Message = function () {
 
 
   _createClass(Message, [{
-    key: "handleMessage",
+    key: 'handleMessage',
     value: function handleMessage(sender_psid, received_message) {
       var response = void 0;
       // Check if the message contains text
       if (received_message.text) {
         // Create the payload for a basic text message
         response = {
-          "text": "You sent the message: \"" + received_message.text + "\". Now send me an attachment!"
+          "text": 'You sent the message: "' + received_message.text + '". Now send me an attachment!'
         };
       } else if (received_message.attachments) {
         // Get the URL of the message attachment
@@ -58,7 +59,7 @@ var Message = function () {
     // Handles messaging_postbacks events
 
   }, {
-    key: "handlePostback",
+    key: 'handlePostback',
     value: function handlePostback(sender_psid, received_postback) {
       var response = void 0;
 
@@ -72,13 +73,14 @@ var Message = function () {
         response = { "text": "Oops, try sending another image." };
       }
       // Send the message to acknowledge the postback
-      this.callSendAPI(sender_psid, response);
+      //this.callSendAPI(sender_psid, response);
+      this.callSendAPI2(sender_psid, response);
     }
 
     // Sends response messages via the Send API
 
   }, {
-    key: "callSendAPI",
+    key: 'callSendAPI',
     value: function callSendAPI(sender_psid, response) {
       // Construct the message body
       var request_body = {
@@ -98,6 +100,38 @@ var Message = function () {
         } else {
           console.error("Unable to send message:" + err);
         }
+      });
+    }
+
+    // Sends response messages via the Send API
+
+  }, {
+    key: 'callSendAPI2',
+    value: function callSendAPI2(sender_psid, response) {
+      // Construct the message body
+      var request_body = {
+        "recipient": {
+          "id": sender_psid
+        },
+        "message": response
+      };
+      var options = {
+        method: 'POST',
+        uri: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {
+          access_token: PAGE_ACCESS_TOKEN
+        },
+        body: {
+          json: request_body
+        },
+        json: true // Automatically stringifies the body to JSON
+      };
+
+      rp(options).then(function (parsedBody) {
+        var res = Json.stringify(parsedBody);
+        console.log("callSendAPI2=", res);
+      }).catch(function (err) {
+        console.error("Unable to send message:" + err);
       });
     }
   }]);

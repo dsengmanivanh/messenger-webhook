@@ -1,5 +1,6 @@
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const rp = require('request-promise-native');
 
 class Message {
 
@@ -62,7 +63,8 @@ class Message {
       response = { "text": "Oops, try sending another image." }
     }
     // Send the message to acknowledge the postback
-    this.callSendAPI(sender_psid, response);
+    //this.callSendAPI(sender_psid, response);
+    this.callSendAPI2(sender_psid, response);
   }
 
   // Sends response messages via the Send API
@@ -88,5 +90,37 @@ class Message {
       }
     });
   }
+
+  // Sends response messages via the Send API
+  callSendAPI2(sender_psid, response) {
+    // Construct the message body
+    let request_body = {
+      "recipient": {
+        "id": sender_psid
+      },
+      "message": response
+    }
+    const options = {
+        method: 'POST',
+        uri: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {
+            access_token: PAGE_ACCESS_TOKEN
+        },
+        body: {
+            json: request_body
+        },
+        json: true // Automatically stringifies the body to JSON
+    };
+
+    rp(options)
+      .then(function (parsedBody) {
+          const res = Json.stringify(parsedBody);
+          console.log("callSendAPI2=",res);
+      })
+      .catch(function (err) {
+          console.error("Unable to send message:" + err);
+      });
+  }
+
 }
 module.exports = new Message();
