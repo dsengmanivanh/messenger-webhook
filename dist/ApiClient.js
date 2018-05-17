@@ -50,10 +50,7 @@ var ApiClient = function () {
             };
 
             rp(options).then(function (res) {
-                console.log("res==========", res);
-                var user = JSON.parse(res);
-                console.log("user======================");
-                return user;
+                return res;
             }).catch(function (err) {
                 console.error("Unable to send message:" + err);
             });
