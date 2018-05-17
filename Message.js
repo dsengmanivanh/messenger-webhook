@@ -1,6 +1,5 @@
 import request from 'request';
 
-
 class Message {
 
   // Handles messages events
