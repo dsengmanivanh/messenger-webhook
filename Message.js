@@ -1,4 +1,5 @@
-import request from 'request';
+const Messrequestage = require('request');
+
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 class Message {
@@ -6,18 +7,42 @@ class Message {
   constructor() {
   }
 
-  getMessage(){
-    console.log('=======================getMessage');
-  }
   // Handles messages events
   handleMessage(sender_psid, received_message) {
     let response;
     // Check if the message contains text
     if (received_message.text) {
-        console.log('=======================handleMessage');
       // Create the payload for a basic text message
       response = {
-        "text": `You sent the message: "${received_message.text}". Now send me an image!`
+        "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      }
+    } else if (received_message.attachments) {
+      // Get the URL of the message attachment
+      const attachment_url = received_message.attachments[0].payload.url;
+      response = {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "generic",
+            "elements": [{
+              "title": "Is this the right picture?",
+              "subtitle": "Tap a button to answer.",
+              "image_url": attachment_url,
+              "buttons": [
+                {
+                  "type": "postback",
+                  "title": "Yes!",
+                  "payload": "yes",
+                },
+                {
+                  "type": "postback",
+                  "title": "No!",
+                  "payload": "no",
+                }
+              ],
+            }]
+          }
+        }
       }
     }
     // Sends the response message
@@ -25,13 +50,12 @@ class Message {
   }
 
   // Handles messaging_postbacks events
-  handlePostback(sender_psid, received_postback) {
+  handlePostback(sender_psid, received_postback){
 
   }
 
   // Sends response messages via the Send API
   callSendAPI(sender_psid, response) {
-    console.log('=======================callSendAPI');
     // Construct the message body
     let request_body = {
       "recipient": {
