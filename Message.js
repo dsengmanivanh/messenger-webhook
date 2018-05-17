@@ -39,7 +39,7 @@ class Message {
                   "title": "No!",
                   "payload": "no",
                 }
-              ],
+              ]
             }]
           }
         }

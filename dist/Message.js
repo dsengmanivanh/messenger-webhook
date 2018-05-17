@@ -4,7 +4,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Messrequestage = require('request');
+var request = require('request');
 
 var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
