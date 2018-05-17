@@ -122,10 +122,7 @@ var Message = function () {
         qs: {
           access_token: PAGE_ACCESS_TOKEN
         },
-        body: {
-          json: request_body
-        },
-        json: true // Automatically stringifies the body to JSON
+        json: request_body // Automatically stringifies the body to JSON
       };
 
       rp(options).then(function (parsedBody) {
