@@ -40,7 +40,7 @@ class ApiClient {
     rp(options)
       .then(function (res) {
           const user = JSON.stringify(res);
-          return User;
+          return user;
       })
       .catch(function (err) {
           console.error("Unable to send message:" + err);
