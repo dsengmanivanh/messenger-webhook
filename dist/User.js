@@ -23,6 +23,7 @@ var User = function () {
     }, {
         key: 'callSendAPI',
         value: function callSendAPI(sender_psid) {
+            console.log('url', 'https://graph.facebook.com/v2.6/'.concat(sender_psid));
             var options = {
                 uri: 'https://graph.facebook.com/v2.6/'.concat(sender_psid),
                 qs: {
@@ -36,8 +37,9 @@ var User = function () {
             };
 
             rp(options).then(function (res) {
-                console.log('=====Ok:', res.length);
+                console.log('=====Ok:', res);
                 var user = JSON.stringify(res);
+                console.log('=====User:', user);
             }).catch(function (err) {
                 console.error("Unable to send message:" + err);
             });
