@@ -30,6 +30,8 @@ app.post('/webhook', function (req, res) {
       // will only ever contain one message, so we get index 0
       var webhook_event = entry.messaging[0];
       console.log(webhook_event);
+      //Message.getMessage();
+      //Message.handleMessage("sender_psid", "webhook_event.message");
 
       // Get the sender PSID
       var sender_psid = webhook_event.sender.id;
@@ -37,6 +39,7 @@ app.post('/webhook', function (req, res) {
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
+      console.log('=======================Avant');
       if (webhook_event.message) {
         console.log('=======================Entre dans message');
         Message.handleMessage(sender_psid, webhook_event.message);

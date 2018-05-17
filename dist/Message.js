@@ -35,7 +35,7 @@ var Message = function () {
         };
       }
       // Sends the response message
-      callSendAPI(sender_psid, response);
+      this.callSendAPI(sender_psid, response);
     }
 
     // Handles messaging_postbacks events
