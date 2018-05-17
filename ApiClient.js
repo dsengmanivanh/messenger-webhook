@@ -40,7 +40,7 @@ class ApiClient {
     rp(options)
       .then(function (res) {
           console.log("res==========",res);
-          const user = JSON.stringify(res);
+          const user = JSON.parse(res);
           console.log("user======================");
           return user;
       })
