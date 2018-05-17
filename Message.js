@@ -1,6 +1,7 @@
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const rp = require('request-promise-native');
+const ApiClient = require('./ApiClient');
 
 class Message {
 
@@ -47,7 +48,13 @@ class Message {
     }
     // Sends the response message
     //this.callSendAPI(sender_psid, response);
-    this.callSendAPI2(sender_psid, response);
+    let request_body = {
+      "recipient": {
+        "id": sender_psid
+      },
+      "message": response
+    }
+    ApiClient.post(sender_psid, request_body);
   }
 
   // Handles messaging_postbacks events
@@ -65,7 +72,13 @@ class Message {
     }
     // Send the message to acknowledge the postback
     //this.callSendAPI(sender_psid, response);
-    this.callSendAPI2(sender_psid, response);
+    let request_body = {
+      "recipient": {
+        "id": sender_psid
+      },
+      "message": response
+    }
+    ApiClient.post(sender_psid, request_body);
   }
 
   // Sends response messages via the Send API

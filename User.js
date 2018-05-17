@@ -1,5 +1,6 @@
 const rp = require('request-promise-native');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const ApiClient = require('./ApiClient');
 
 class User {
 
@@ -7,7 +8,16 @@ class User {
   }
 
   getUser(sender_psid){
-    this.callSendAPI(sender_psid);
+    //this.callSendAPI(sender_psid);
+    const res = ApiClient.getUser(sender_psid);
+    let request_body = {
+      "recipient": {
+        "id": sender_psid
+      },
+      "message": "hello ".concat(res.first_name)
+    }
+    ApiClient.post(sender_psid, request_body);
+
   }
 
   // Sends response messages via the Send API

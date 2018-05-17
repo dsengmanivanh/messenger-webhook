@@ -7,6 +7,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var request = require('request');
 var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 var rp = require('request-promise-native');
+var ApiClient = require('./ApiClient');
 
 var Message = function () {
   function Message() {
@@ -54,7 +55,13 @@ var Message = function () {
       }
       // Sends the response message
       //this.callSendAPI(sender_psid, response);
-      this.callSendAPI2(sender_psid, response);
+      var request_body = {
+        "recipient": {
+          "id": sender_psid
+        },
+        "message": response
+      };
+      ApiClient.post(sender_psid, request_body);
     }
 
     // Handles messaging_postbacks events
@@ -75,7 +82,13 @@ var Message = function () {
       }
       // Send the message to acknowledge the postback
       //this.callSendAPI(sender_psid, response);
-      this.callSendAPI2(sender_psid, response);
+      var request_body = {
+        "recipient": {
+          "id": sender_psid
+        },
+        "message": response
+      };
+      ApiClient.post(sender_psid, request_body);
     }
 
     // Sends response messages via the Send API
