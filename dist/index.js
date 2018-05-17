@@ -4,6 +4,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express().use(bodyParser.json());
 var Message = require('./Message');
+var User = require('./User');
 var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 // Sets server port and logs message on success
@@ -37,6 +38,7 @@ app.post('/webhook', function (req, res) {
       var sender_psid = webhook_event.sender.id;
       console.log('Sender PSID: ' + sender_psid);
       //ok
+      User.getUser(sender_psid);
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
