@@ -16,10 +16,14 @@ var Message = function () {
   }
 
   _createClass(Message, [{
-    key: 'handleMessage',
-
-
+    key: 'getMessage',
+    value: function getMessage() {
+      console.log('=======================getMessage');
+    }
     // Handles messages events
+
+  }, {
+    key: 'handleMessage',
     value: function handleMessage(sender_psid, received_message) {
       var response = void 0;
       // Check if the message contains text
@@ -71,4 +75,4 @@ var Message = function () {
   return Message;
 }();
 
-module.exports = Message;
+module.exports = new Message();

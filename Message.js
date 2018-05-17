@@ -2,6 +2,12 @@ import request from 'request';
 
 class Message {
 
+  constructor() {
+  }
+
+  getMessage(){
+    console.log('=======================getMessage');
+  }
   // Handles messages events
   handleMessage(sender_psid, received_message) {
     let response;
@@ -47,4 +53,4 @@ class Message {
     });
   }
 }
-module.exports = Message;
+module.exports = new Message();

@@ -34,7 +34,6 @@ app.post('/webhook', (req, res) => {
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
-      console.log('=======================Avant');
       if(webhook_event.message) {
         console.log('=======================Entre dans message');
         Message.handleMessage(sender_psid, webhook_event.message);
