@@ -18,7 +18,7 @@ var User = function () {
         value: function getUser(sender_psid) {
             //this.callSendAPI(sender_psid);
             var user = ApiClient.getUser(sender_psid);
-            console.log("user====", user);
+            console.log("user apres====", user);
             var request_body = {
                 "recipient": {
                     "id": sender_psid

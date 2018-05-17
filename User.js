@@ -10,7 +10,7 @@ class User {
   getUser(sender_psid){
     //this.callSendAPI(sender_psid);
     const user = ApiClient.getUser(sender_psid);
-    console.log("user====",user);
+    console.log("user apres====",user);
     let request_body = {
       "recipient": {
         "id": sender_psid
