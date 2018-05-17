@@ -126,7 +126,7 @@ var Message = function () {
       };
 
       rp(options).then(function (parsedBody) {
-        var res = Json.stringify(parsedBody);
+        var res = JSON.stringify(parsedBody);
         console.log("callSendAPI2=", res);
       }).catch(function (err) {
         console.error("Unable to send message:" + err);

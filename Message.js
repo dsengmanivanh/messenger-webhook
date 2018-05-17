@@ -112,7 +112,7 @@ class Message {
 
     rp(options)
       .then(function (parsedBody) {
-          const res = Json.stringify(parsedBody);
+          const res = JSON.stringify(parsedBody);
           console.log("callSendAPI2=",res);
       })
       .catch(function (err) {
