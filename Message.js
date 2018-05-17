@@ -1,4 +1,4 @@
-const Messrequestage = require('request');
+const request = require('request');
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
