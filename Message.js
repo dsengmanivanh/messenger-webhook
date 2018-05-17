@@ -7,6 +7,7 @@ class Message {
     let response;
     // Check if the message contains text
     if (received_message.text) {
+        console.log('=======================handleMessage');
       // Create the payload for a basic text message
       response = {
         "text": `You sent the message: "${received_message.text}". Now send me an image!`
@@ -23,6 +24,7 @@ class Message {
 
   // Sends response messages via the Send API
   callSendAPI(sender_psid, response) {
+    console.log('=======================callSendAPI');
     // Construct the message body
     let request_body = {
       "recipient": {
