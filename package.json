@@ -4,12 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules",
+    "start": "npm run build && PAGE_ACCESS_TOKEN='EAAfZA8I6rg34BAI2LEr0BCnXik6WUoR2HMWJd61QTOFsMnutZADhe0AiisRgtesk9E5fPfjfvpj7lXDNKdSHfpdKpAHkr3mBfONUonpydWj9WnMgF8WzKv53hetSWOcNo2ZAwZAGNaSW7QLvGsoOusGMIsZBgw9zpxCIZCVzWM4RoMYcpRZAaSCxYBmZBZAkKsUcZD' node dist/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
   }
 }

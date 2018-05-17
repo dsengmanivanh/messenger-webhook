@@ -1,14 +1,11 @@
-'use strict';
-
-// Imports dependencies and set up http server
-const
-  express = require('express'),
-  bodyParser = require('body-parser'),
-  app = express().use(bodyParser.json()); // creates express http server
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express().use(bodyParser.json());
+const Message = require('./Message');
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
-
 
 app.get('/', function(req,res){
 	res.send("Hi I am a chatbot")
@@ -30,6 +27,11 @@ app.post('/webhook', (req, res) => {
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
+
+      // Get the sender PSID
+      let sender_psid = webhook_event.sender.id;
+      console.log('Sender PSID: ' + sender_psid);
+
     });
 
     // Returns a '200 OK' response to all requests
@@ -45,7 +47,7 @@ app.post('/webhook', (req, res) => {
 app.get('/webhook', (req, res) => {
 
   // Your verify token. Should be a random string.
-  let VERIFY_TOKEN = "EAAfZA8I6rg34BAI2LEr0BCnXik6WUoR2HMWJd61QTOFsMnutZADhe0AiisRgtesk9E5fPfjfvpj7lXDNKdSHfpdKpAHkr3mBfONUonpydWj9WnMgF8WzKv53hetSWOcNo2ZAwZAGNaSW7QLvGsoOusGMIsZBgw9zpxCIZCVzWM4RoMYcpRZAaSCxYBmZBZAkKsUcZD"
+  const VERIFY_TOKEN = PAGE_ACCESS_TOKEN;
 
   // Parse the query params
   let mode = req.query['hub.mode'];
