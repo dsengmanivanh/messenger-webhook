@@ -17,12 +17,13 @@ var User = function () {
         key: 'getUser',
         value: function getUser(sender_psid) {
             //this.callSendAPI(sender_psid);
-            var res = ApiClient.getUser(sender_psid);
+            var user = ApiClient.getUser(sender_psid);
+            console.log("user====", user);
             var request_body = {
                 "recipient": {
                     "id": sender_psid
                 },
-                "message": "hello ".concat(res.first_name)
+                "message": "hello ".concat(user.first_name)
             };
             ApiClient.post(sender_psid, request_body);
         }
