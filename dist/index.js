@@ -34,6 +34,19 @@ app.post('/webhook', function (req, res) {
       // Get the sender PSID
       var sender_psid = webhook_event.sender.id;
       console.log('Sender PSID: ' + sender_psid);
+
+      // Check if the event is a message or postback and
+      // pass the event to the appropriate handler function
+      console.log('=======================Avant');
+      if (webhook_event.message) {
+        console.log('=======================Entre dans message');
+        Message.handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback) {
+        console.log('=======================Entre dans Postback');
+        Message.handlePostback(sender_psid, webhook_event.postback);
+      } else {
+        console.log('=======================Entre dans aucun');
+      }
     });
 
     // Returns a '200 OK' response to all requests
