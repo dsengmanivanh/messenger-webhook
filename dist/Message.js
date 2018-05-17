@@ -73,7 +73,7 @@ var Message = function () {
         response = { "text": "Oops, try sending another image." };
       }
       // Send the message to acknowledge the postback
-      callSendAPI(sender_psid, response);
+      this.callSendAPI(sender_psid, response);
     }
 
     // Sends response messages via the Send API
