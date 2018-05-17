@@ -60,7 +60,21 @@ var Message = function () {
 
   }, {
     key: "handlePostback",
-    value: function handlePostback(sender_psid, received_postback) {}
+    value: function handlePostback(sender_psid, received_postback) {
+      var response = void 0;
+
+      // Get the payload for the postback
+      var payload = received_postback.payload;
+
+      // Set the response based on the postback payload
+      if (payload === 'yes') {
+        response = { "text": "Thanks!" };
+      } else if (payload === 'no') {
+        response = { "text": "Oops, try sending another image." };
+      }
+      // Send the message to acknowledge the postback
+      callSendAPI(sender_psid, response);
+    }
 
     // Sends response messages via the Send API
 
