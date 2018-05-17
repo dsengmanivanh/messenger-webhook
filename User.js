@@ -11,6 +11,7 @@ class User {
     //this.callSendAPI(sender_psid);
     const user = ApiClient.getUser(sender_psid);
     console.log("user apres====",user);
+    /*console.log("user apres====",user);
     let request_body = {
       "recipient": {
         "id": sender_psid
@@ -18,7 +19,7 @@ class User {
       "message": "hello ".concat(user.first_name)
     }
     ApiClient.post(sender_psid, request_body);
-
+    */
   }
 
   // Sends response messages via the Send API
