@@ -9,13 +9,15 @@ class MessageService {
 
 
   handle(sender_psid, received_message) {
-  	let message = received_message.text.toLowerCase();
-    let request_body = new Text(sender_psid,text);
-    if (message.includes("generic")) {
-		    request_body = new Generic(sender_psid);
+    if(received_message.text){
+      let message = received_message.text.toLowerCase();
+      let request_body = new Text(sender_psid,text);
+      if (message.includes("generic")) {
+  		    request_body = new Generic(sender_psid);
+      }
+      console.log("request_body=",request_body.getTemplate());
+      ApiClient.post(sender_psid, request_body);
     }
-    console.log("request_body=",request_body.getTemplate());
-    ApiClient.post(sender_psid, request_body);
   }
 
   // Handles messages events
