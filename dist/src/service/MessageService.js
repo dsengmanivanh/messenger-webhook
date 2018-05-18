@@ -18,7 +18,7 @@ var MessageService = function () {
     value: function handle(sender_psid, received_message) {
       if (received_message.text) {
         var message = received_message.text.toLowerCase();
-        var request_body = new Text(sender_psid, text);
+        var request_body = new Text(sender_psid, "ok text");
         if (message.includes("generic")) {
           request_body = new Generic(sender_psid);
         }

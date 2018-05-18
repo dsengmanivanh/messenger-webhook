@@ -11,7 +11,7 @@ class MessageService {
   handle(sender_psid, received_message) {
     if(received_message.text){
       let message = received_message.text.toLowerCase();
-      let request_body = new Text(sender_psid,text);
+      let request_body = new Text(sender_psid,"ok text");
       if (message.includes("generic")) {
   		    request_body = new Generic(sender_psid);
       }
