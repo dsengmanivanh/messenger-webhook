@@ -1,12 +1,9 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var request = require('request');
-var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-var rp = require('request-promise-native');
 var ApiClient = require('./ApiClient');
 
 var Message = function () {
@@ -18,14 +15,14 @@ var Message = function () {
 
 
   _createClass(Message, [{
-    key: 'handleMessage',
+    key: "handleMessage",
     value: function handleMessage(sender_psid, received_message) {
       var response = void 0;
       // Check if the message contains text
       if (received_message.text) {
         // Create the payload for a basic text message
         response = {
-          "text": 'You sent the message: "' + received_message.text + '". Now send me an attachment!'
+          "text": "You sent the message: \"" + received_message.text + "\". Now send me an attachment!"
         };
       } else if (received_message.attachments) {
         // Get the URL of the message attachment
@@ -67,7 +64,7 @@ var Message = function () {
     // Handles messaging_postbacks events
 
   }, {
-    key: 'handlePostback',
+    key: "handlePostback",
     value: function handlePostback(sender_psid, received_postback) {
       var response = void 0;
 
@@ -89,61 +86,6 @@ var Message = function () {
         "message": response
       };
       ApiClient.post(sender_psid, request_body);
-    }
-
-    // Sends response messages via the Send API
-
-  }, {
-    key: 'callSendAPI',
-    value: function callSendAPI(sender_psid, response) {
-      // Construct the message body
-      var request_body = {
-        "recipient": {
-          "id": sender_psid
-        },
-        "message": response
-        // Send the HTTP request to the Messenger Platform
-      };request({
-        "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-      }, function (err, res, body) {
-        if (!err) {
-          console.log('message sent!');
-        } else {
-          console.error("Unable to send message:" + err);
-        }
-      });
-    }
-
-    // Sends response messages via the Send API
-
-  }, {
-    key: 'callSendAPI2',
-    value: function callSendAPI2(sender_psid, response) {
-      // Construct the message body
-      var request_body = {
-        "recipient": {
-          "id": sender_psid
-        },
-        "message": response
-      };
-      var options = {
-        method: 'POST',
-        uri: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {
-          access_token: PAGE_ACCESS_TOKEN
-        },
-        json: request_body // Automatically stringifies the body to JSON
-      };
-
-      rp(options).then(function (parsedBody) {
-        var res = JSON.stringify(parsedBody);
-        console.log("callSendAPI2=", res);
-      }).catch(function (err) {
-        console.error("Unable to send message:" + err);
-      });
     }
   }]);
 

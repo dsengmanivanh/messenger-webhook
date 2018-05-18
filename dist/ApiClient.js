@@ -26,6 +26,7 @@ var ApiClient = function () {
 
             rp(options).then(function (parsedBody) {
                 var res = JSON.stringify(parsedBody);
+                console.error("Send message:" + res);
             }).catch(function (err) {
                 console.error("Unable to send message:" + err);
             });
@@ -50,7 +51,7 @@ var ApiClient = function () {
             };
 
             rp(options).then(function (res) {
-                return res;
+                return JSON.stringify(res);
             }).catch(function (err) {
                 console.error("Unable to send message:" + err);
             });
