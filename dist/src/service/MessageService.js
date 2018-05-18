@@ -15,8 +15,8 @@ var MessageService = function () {
 
   _createClass(MessageService, [{
     key: 'handle',
-    value: function handle(sender_psid, text) {
-      var message = text.toLowerCase();
+    value: function handle(sender_psid, received_message) {
+      var message = received_message.text.toLowerCase();
       var request_body = new Text(sender_psid, text);
       if (message.includes("generic")) {
         request_body = new Generic(sender_psid);

@@ -8,8 +8,8 @@ class MessageService {
   }
 
 
-  handle(sender_psid, text) {
-  	let message = text.toLowerCase();
+  handle(sender_psid, received_message) {
+  	let message = received_message.text.toLowerCase();
     let request_body = new Text(sender_psid,text);
     if (message.includes("generic")) {
 		    request_body = new Generic(sender_psid);
