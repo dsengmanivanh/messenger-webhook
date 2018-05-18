@@ -6,38 +6,56 @@ class Generic {
   }
 
   getTemplate() {
+
     return {
-      "recipient":{
-        "id":this.sender_psid
+      "recipient": {
+        "id": this.sender_psid
       },
-      "message":{
-        "attachment":{
-          "type":"template",
-          "payload":{
-            "template_type":"generic",
-            "elements":[
-               {
-                "title":"Welcome!",
-                "image_url":"https://petersfancybrownhats.com/company_image.png",
-                "subtitle":"We have the right hat for everyone.",
+      "message": {
+        "attachment": {
+          "type": "template",
+          "payload": {
+            "template_type": "list",
+            "top_element_style": "compact",
+            "elements": [
+              {
+                "title": "Hello 1",
+                "subtitle": "Subtitle 1",
+                "buttons": [
+                  {
+                    "title": "View",
+                    "type": "web_url",
+                    "url": "https://www.medium.com/",
+                    "messenger_extensions": "false",
+                    "webview_height_ratio": "full"
+                  }
+                ],
                 "default_action": {
                   "type": "web_url",
-                  "url": "https://petersfancybrownhats.com/view?item=103",
-                  "messenger_extensions": false,
-                  "webview_height_ratio": "tall",
-                  "fallback_url": "https://petersfancybrownhats.com/"
-                },
-                "buttons":[
+                  "url": "https://www.medium.com/",
+                  "messenger_extensions": "false",
+                  "webview_height_ratio": "full"
+                }
+              },
+              {
+                "title": "Hello 2",
+                "subtitle": "Subtitle 2",
+                "image_url": "https://cdn-images-1.medium.com/1*Vkf6A8Mb0wBoL3Fw1u0paA.jpeg",
+                "buttons": [
                   {
-                    "type":"web_url",
-                    "url":"https://petersfancybrownhats.com",
-                    "title":"View Website"
-                  },{
-                    "type":"postback",
-                    "title":"Start Chatting",
-                    "payload":"DEVELOPER_DEFINED_PAYLOAD"
+                    "title": "View",
+                    "type": "web_url",
+                    "url": "https://www.medium.com/",
+                    "messenger_extensions": "false",
+                    "webview_height_ratio": "full"
                   }
-                ]
+                ],
+                "default_action": {
+                  "type": "web_url",
+                  "url": "https://www.medium.com/",
+                  "messenger_extensions": "false",
+                  "webview_height_ratio": "full"
+                }
               }
             ]
           }

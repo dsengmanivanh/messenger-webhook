@@ -4,7 +4,7 @@ const app = express().use(bodyParser.json());
 const MessageService = require('./service/MessageService');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 3000, () => console.log('webhook is listening'));
 
 app.get('/', (req,res) => {
 	res.send("Hi I am a chatbot");

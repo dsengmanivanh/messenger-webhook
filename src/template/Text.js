@@ -11,7 +11,9 @@ class Text {
       "recipient": {
         "id": this.sender_psid
       },
-      "message": this.message
+      "message": {
+        "text": this.message
+      }
     }
   }
 

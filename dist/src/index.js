@@ -6,7 +6,7 @@ var app = express().use(bodyParser.json());
 var MessageService = require('./service/MessageService');
 var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-app.listen(process.env.PORT || 1337, function () {
+app.listen(process.env.PORT || 3000, function () {
   return console.log('webhook is listening');
 });
 

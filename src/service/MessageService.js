@@ -15,58 +15,8 @@ class MessageService {
       if (message.includes("generic")) {
   		    request_body = new Generic(sender_psid);
       }
-      console.log("request_body=",request_body.getTemplate());
       ApiClient.post(sender_psid, request_body.getTemplate());
     }
-  }
-
-  // Handles messages events
-  handleMessage(sender_psid, received_message) {
-    let response;
-    // Check if the message contains text
-    if (received_message.text) {
-      // Create the payload for a basic text message
-      response = {
-        "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-      }
-    } else if (received_message.attachments) {
-      // Get the URL of the message attachment
-      const attachment_url = received_message.attachments[0].payload.url;
-      response = {
-        "attachment": {
-          "type": "template",
-          "payload": {
-            "template_type": "generic",
-            "elements": [{
-              "title": "Is this the right picture?",
-              "subtitle": "Tap a button to answer.",
-              "image_url": attachment_url,
-              "buttons": [
-                {
-                  "type": "postback",
-                  "title": "Yes!",
-                  "payload": "yes",
-                },
-                {
-                  "type": "postback",
-                  "title": "No!",
-                  "payload": "no",
-                }
-              ]
-            }]
-          }
-        }
-      }
-    }
-    // Sends the response message
-    //this.callSendAPI(sender_psid, response);
-    let request_body = {
-      "recipient": {
-        "id": sender_psid
-      },
-      "message": response
-    }
-    ApiClient.post(sender_psid, request_body);
   }
 
   // Handles messaging_postbacks events
