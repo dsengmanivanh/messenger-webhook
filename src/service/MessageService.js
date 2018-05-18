@@ -16,7 +16,7 @@ class MessageService {
   		    request_body = new Generic(sender_psid);
       }
       console.log("request_body=",request_body.getTemplate());
-      ApiClient.post(sender_psid, request_body);
+      ApiClient.post(sender_psid, request_body.getTemplate());
     }
   }
 
