@@ -1,28 +1,41 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ApiClient = require('./ApiClient');
+var ApiClient = require('../api/ApiClient');
+var Text = require('../template/Text');
+var Generic = require('../template/Generic');
 
-var Message = function () {
-  function Message() {
-    _classCallCheck(this, Message);
+var MessageService = function () {
+  function MessageService() {
+    _classCallCheck(this, MessageService);
   }
 
-  // Handles messages events
+  _createClass(MessageService, [{
+    key: 'handle',
+    value: function handle(sender_psid, text) {
+      var message = text.toLowerCase();
+      var request_body = new Text(sender_psid, text);
+      if (message.includes("generic")) {
+        request_body = new Generic(sender_psid);
+      }
+      console.log("request_body=", request_body.getTemplate());
+      ApiClient.post(sender_psid, request_body);
+    }
 
+    // Handles messages events
 
-  _createClass(Message, [{
-    key: "handleMessage",
+  }, {
+    key: 'handleMessage',
     value: function handleMessage(sender_psid, received_message) {
       var response = void 0;
       // Check if the message contains text
       if (received_message.text) {
         // Create the payload for a basic text message
         response = {
-          "text": "You sent the message: \"" + received_message.text + "\". Now send me an attachment!"
+          "text": 'You sent the message: "' + received_message.text + '". Now send me an attachment!'
         };
       } else if (received_message.attachments) {
         // Get the URL of the message attachment
@@ -64,7 +77,7 @@ var Message = function () {
     // Handles messaging_postbacks events
 
   }, {
-    key: "handlePostback",
+    key: 'handlePostback',
     value: function handlePostback(sender_psid, received_postback) {
       var response = void 0;
 
@@ -89,7 +102,7 @@ var Message = function () {
     }
   }]);
 
-  return Message;
+  return MessageService;
 }();
 
-module.exports = new Message();
+module.exports = new MessageService();

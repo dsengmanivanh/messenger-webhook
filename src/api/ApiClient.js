@@ -25,7 +25,7 @@ class ApiClient {
 
   // Sends response messages via the Send API
   getUser(sender_psid) {
-    console.log('url','https://graph.facebook.com/v2.6/'.concat(sender_psid))
+    let result = [];
     const options = {
         uri: 'https://graph.facebook.com/v2.6/'.concat(sender_psid),
         qs: {
@@ -41,11 +41,13 @@ class ApiClient {
     rp(options)
       .then(function (res) {
           console.log("res avant",res);
-          return JSON.stringify(res);
+          result = result.push(JSON.stringify(res));
+          return result;
       })
       .catch(function (err) {
           console.error("Unable to send message:" + err);
       });
+    return result;
   }
 }
 

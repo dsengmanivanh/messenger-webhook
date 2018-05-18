@@ -1,8 +1,21 @@
-const ApiClient = require('./ApiClient');
+const ApiClient = require('../api/ApiClient');
+const Text = require('../template/Text');
+const Generic = require('../template/Generic');
 
-class Message {
+class MessageService {
 
   constructor() {
+  }
+
+
+  handle(sender_psid, text) {
+  	let message = text.toLowerCase();
+    let request_body = new Text(sender_psid,text);
+    if (message.includes("generic")) {
+		    request_body = new Generic(sender_psid);
+    }
+    console.log("request_body=",request_body.getTemplate());
+    ApiClient.post(sender_psid, request_body);
   }
 
   // Handles messages events
@@ -79,4 +92,4 @@ class Message {
   }
 
 }
-module.exports = new Message();
+module.exports = new MessageService();

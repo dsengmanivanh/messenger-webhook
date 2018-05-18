@@ -4,24 +4,27 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ApiClient = require('./ApiClient');
+var Text = function () {
+  function Text(sender_psid, message) {
+    _classCallCheck(this, Text);
 
-var User = function () {
-  function User() {
-    _classCallCheck(this, User);
+    this.sender_psid = sender_psid;
+    this.message = message;
   }
 
-  _createClass(User, [{
-    key: "getUser",
-    value: function getUser(sender_psid) {
-      var res = ApiClient.getUser(sender_psid);
-      console.log("res apres====", res);
-      var user = JSON.parse(res);
-      return user.first_name;
+  _createClass(Text, [{
+    key: "getTemplate",
+    value: function getTemplate() {
+      return {
+        "recipient": {
+          "id": this.sender_psid
+        },
+        "message": this.message
+      };
     }
   }]);
 
-  return User;
+  return Text;
 }();
 
-module.exports = new User();
+module.exports = Text;

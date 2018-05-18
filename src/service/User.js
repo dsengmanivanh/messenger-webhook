@@ -1,4 +1,4 @@
-const ApiClient = require('./ApiClient');
+const ApiClient = require('../api/ApiClient');
 
 class User {
 
@@ -7,7 +7,6 @@ class User {
 
   getUser(sender_psid){
     const res = ApiClient.getUser(sender_psid);
-    console.log("res apres====",res);
     const user = JSON.parse(res);
     return user.first_name;
   }
