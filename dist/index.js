@@ -36,9 +36,9 @@ app.post('/webhook', function (req, res) {
 
       // Get the sender PSID
       var sender_psid = webhook_event.sender.id;
-      console.log('Sender PSID: ' + sender_psid);
+      console.log('Sender PSID: ', sender_psid);
       //ok
-      var firstname = User.getUser(sender_psid);
+      //const firstname = User.getUser(sender_psid);
 
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function

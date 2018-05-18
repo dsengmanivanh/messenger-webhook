@@ -40,6 +40,7 @@ class ApiClient {
 
     rp(options)
       .then(function (res) {
+          console.log("res avant",res);
           return JSON.stringify(res);
       })
       .catch(function (err) {

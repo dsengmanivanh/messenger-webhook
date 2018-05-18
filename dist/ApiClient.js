@@ -51,6 +51,7 @@ var ApiClient = function () {
             };
 
             rp(options).then(function (res) {
+                console.log("res avant", res);
                 return JSON.stringify(res);
             }).catch(function (err) {
                 console.error("Unable to send message:" + err);
