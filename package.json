@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf dist/ && babel ./ --out-dir dist/ --ignore ./node_modules",
-    "start": "npm run build && PAGE_ACCESS_TOKEN='EAACfYpmifbwBAMEFcO8xU2QNfLnccbYF1J3gxvx4SdZCWbRoxr4WkXnnSm9zd0ZAVbZBZAcFRbhf4bbaQ8ltUZCKS6kN9Tz8BzxZA0iejcSuuSW3Tv3pThVOlgcAZB1DurYSp4nVz4Fo0MMVEvQ4ZCWgURmeWpAigU4wc6ZBIszZCBrAZDZD' node dist/index.js"
+    "start": "npm run build && PAGE_ACCESS_TOKEN='tokenid' node dist/index.js"
   },
   "author": "",
   "license": "ISC",
